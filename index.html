@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RJ Puncher</title>
+	<link rel="stylesheet" href="styles.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<style>
+		#theBody {
+			background: radial-gradient(circle, rgb(128, 128, 128) 0%, rgb(0, 0, 0) 100%);
+			text-align: center;
+			font-family: Copperplate,Copperplate Gothic Light,fantasy;
+		}
+		#rjImage {
+			width: 40%;
+			max-width: 40%;
+			max-height: 40%;
+			z-index: 2;
+		}
+		#powImage {
+			width: 15%;
+			height:25%;
+			max-width: 15%;
+			max-height: 25%;
+			z-index: 5;
+			position: absolute;
+  			top: 50%;
+  			left: 50%;
+  			transform: translate(-50%, -50%);
+			display:none;
+		}
+		#rjDiv, #titleDisplay {
+			width: 50%;
+			max-width: 50%;
+			max-height: 50%;
+			position: absolute;
+  			top: 50%;
+  			left: 50%;
+  			transform: translate(-50%, -50%);
+			font-size: 30px;
+		}
+		#infoBox {
+			width: 50%;
+			height: 15%;
+			border: 2px solid #000000;
+			background: radial-gradient(circle, rgb(128, 128, 128) 0%, rgb(0, 0, 0) 100%);
+			position: absolute;
+			height: 4rem;
+  			line-height: 4rem;
+  			top: 87.5%;
+  			left: 50%;
+  			transform: translate(-50%, -50%);
+			font-family: inherit;
+			font-size: 40px;
+		}
+	</style>
+	<script>
+		let punches = 0;
+		let colorG = 128;
+		let colorB = 128;
+		let bgDecVal = 0;
+		function punchRJ() {
+			if (punches < 100) {
+				punches++;
+				document.getElementById("powImage").style.display= "block";
+				setTimeout(function() {
+					document.getElementById("powImage").style.display= "none";
+				}, 50 );
+				colorG--;
+				colorB--;
+				document.getElementById("infoBox").style.background= "radial-gradient(circle, rgb(128, "+colorG+", "+colorB+") 0%, rgb(0, 0, 0) 100%)";
+			} else {
+				document.getElementById("infoBox").style.background= "radial-gradient(circle, rgb(128, 0, 0) 0%, rgb(0, 0, 0) 100%)";				
+				document.getElementById("infoBox").innerText = "He is defeated.";
+				for(let bgDec=0;bgDec<128;bgDec++) {
+					console.log(bgDec);
+					setTimeout(function() {
+						bgDecVal = 128-bgDec;
+						document.getElementById("theBody").style.background= "radial-gradient(circle, rgb("+bgDecVal+", "+bgDecVal+", "+bgDecVal+") 0%, rgb(0, 0, 0) 100%)";
+					}, bgDec*10)
+				}
+				setTimeout(function() {
+					document.getElementById("rjImage").src= "https://i.ibb.co/cT9cZPK/20240214-175323.jpg";
+				}, 2700 );
+			}
+		}
+	</script>
+</head>
+<body id="theBody">
+	<img id="powImage" src="https://i.ibb.co/xLdVZxG/istockphoto-911373166-612x612.png" alt="pow">
+	<div id="rjDiv" style="word-break:break-all;"><img id="rjImage" src="https://i.ibb.co/ZLssbZb/20240214-175306.jpg" alt="stupid idiot" onclick="punchRJ()"></div>
+	<div id="titleDisplay" style="font-size:300%; top:15%;">RJ Puncher</div>
+	<div id="infoBox">Goal: Punch RJ</div>
+</body>
+</html>
